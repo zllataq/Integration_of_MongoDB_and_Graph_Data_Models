@@ -2,9 +2,6 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import pandas as pd
 
-# =====================================================
-# 1. ДАННЫЕ: ГОРОДА (50 вершин)
-# =====================================================
 cities_data = [
     {"id": 1, "name": "Tokyo", "country": "Japan", "type": "hub", "lat": 35.6762, "lon": 139.6503},
     {"id": 2, "name": "Seoul", "country": "South Korea", "type": "hub", "lat": 37.5665, "lon": 126.9780},
@@ -58,9 +55,7 @@ cities_data = [
     {"id": 50, "name": "Shiraz", "country": "Iran", "type": "major_city", "lat": 29.5918, "lon": 52.5837}
 ]
 
-# =====================================================
-# 2. ДАННЫЕ: МАРШРУТЫ (87 рёбер)
-# =====================================================
+
 routes_data = [
     # От Токио (1)
     (1, 2, 1150), (1, 3, 2100), (1, 4, 1750), (1, 5, 2900), (1, 27, 400), (1, 28, 260),
@@ -164,14 +159,8 @@ routes_data = [
     (50, 18, 750), (50, 7, 700)
 ]
 
-# =====================================================
-# 3. ПОСТРОЕНИЕ ГРАФА
-# =====================================================
-
-# Создаём граф
 G = nx.Graph()
 
-# Добавляем вершины с атрибутами
 for city in cities_data:
     G.add_node(city["id"], 
                name=city["name"], 
@@ -180,28 +169,20 @@ for city in cities_data:
                lat=city["lat"], 
                lon=city["lon"])
 
-# Добавляем рёбра с весом
 for from_id, to_id, weight in routes_data:
     G.add_edge(from_id, to_id, weight=weight)
 
-# =====================================================
-# 4. НАСТРОЙКИ ВИЗУАЛИЗАЦИИ
-# =====================================================
 
-# Цвета для разных типов городов
 color_map = {
     "hub": "#FF4444",       # Красный для хабов
     "capital": "#4488FF",   # Синий для столиц
     "major_city": "#44BB44" # Зелёный для крупных городов
 }
 
-# Получаем цвета для каждой вершины
 node_colors = [color_map[G.nodes[node]["type"]] for node in G.nodes()]
 
-# Получаем названия городов для подписей
 labels = {node: G.nodes[node]["name"] for node in G.nodes()}
 
-# Размер узлов в зависимости от типа
 node_sizes = []
 for node in G.nodes():
     if G.nodes[node]["type"] == "hub":
@@ -211,16 +192,11 @@ for node in G.nodes():
     else:
         node_sizes.append(500)       # Остальные маленькие
 
-# =====================================================
-# 5. РИСОВАНИЕ ГРАФА
-# =====================================================
 
 plt.figure(figsize=(20, 16))
 
-# Позиционирование узлов по координатам (для реалистичной карты)
 pos = {node: (G.nodes[node]["lon"], G.nodes[node]["lat"]) for node in G.nodes()}
 
-# Рисуем граф
 nx.draw_networkx_nodes(G, pos, 
                        node_color=node_colors, 
                        node_size=node_sizes,
@@ -228,13 +204,11 @@ nx.draw_networkx_nodes(G, pos,
                        edgecolors='black',
                        linewidths=1.5)
 
-# Рисуем рёбра с прозрачностью
 nx.draw_networkx_edges(G, pos, 
                        alpha=0.3, 
                        edge_color='gray',
                        width=0.8)
 
-# Подписи городов
 nx.draw_networkx_labels(G, pos, labels, 
                         font_size=9, 
                         font_weight='bold',
@@ -243,14 +217,12 @@ nx.draw_networkx_labels(G, pos, labels,
                                  edgecolor="none", 
                                  alpha=0.8))
 
-# Заголовок и настройки
 plt.title("Граф азиатских авиаперелётов (50 городов, 87 маршрутов)", 
           fontsize=20, fontweight='bold', pad=20)
 plt.xlabel("Долгота", fontsize=12)
 plt.ylabel("Широта", fontsize=12)
 plt.grid(True, alpha=0.3)
 
-# Легенда
 from matplotlib.patches import Patch
 legend_elements = [
     Patch(facecolor='#FF4444', label='Хаб (9 городов)', edgecolor='black'),
@@ -262,31 +234,3 @@ plt.legend(handles=legend_elements, loc='upper left', fontsize=12)
 plt.tight_layout()
 plt.savefig('asia_flights_graph.png', dpi=300, bbox_inches='tight')
 plt.show()
-
-# =====================================================
-# 6. СТАТИСТИКА ГРАФА
-# =====================================================
-print("=" * 60)
-print("📊 ХАРАКТЕРИСТИКИ ГРАФА")
-print("=" * 60)
-print(f"Количество вершин: {G.number_of_nodes()}")
-print(f"Количество рёбер: {G.number_of_edges()}")
-print(f"Средняя степень: {sum(dict(G.degree()).values()) / G.number_of_nodes():.2f}")
-
-# Степени вершин
-degrees = dict(G.degree())
-hubs = [node for node, deg in degrees.items() if deg >= 6]
-print(f"Хабы (степень >= 6): {len(hubs)}")
-for hub in hubs:
-    print(f"  - {G.nodes[hub]['name']}: {degrees[hub]} связей")
-
-# Диаметр графа (если граф связный)
-if nx.is_connected(G):
-    diameter = nx.diameter(G)
-    print(f"Диаметр графа: {diameter}")
-else:
-    print("Граф не является связным, диаметр не определён")
-
-# Подсчёт компонент связности
-components = list(nx.connected_components(G))
-print(f"Количество компонент связности: {len(components)}")
