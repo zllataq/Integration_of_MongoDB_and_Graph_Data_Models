@@ -7,7 +7,6 @@ import json
 import random
 import os
 
-#200 городов
 
 cities_base = [
     # Япония (6)

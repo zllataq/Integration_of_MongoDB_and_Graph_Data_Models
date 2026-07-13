@@ -86,7 +86,6 @@ def get_neighbors_of_neighbors(city_id):
 
 
 if __name__ == "__main__":
-    # Тестирование для Дубая (ID = 7)
     dubai = get_city_by_name("Dubai")
     
     if not dubai:

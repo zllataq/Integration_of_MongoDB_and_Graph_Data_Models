@@ -221,9 +221,7 @@ def run_performance_test():
     print(f"  Найдено соседей (MongoDB):  {len(neighbors_mongo)}")
     print(f"  Найдено соседей (Python):   {len(neighbors_python)}")
     
-    print("\n" + "-" * 70)
     print("ЗАПРОС 2 УРОВНЯ (соседи соседей)")
-    print("-" * 70)
     print(f"  MongoDB:                {time_mongo_2:.6f} сек")
     print(f"  Python (без MongoDB):   {time_python_2:.6f} сек")
     if time_python_2 > 0:

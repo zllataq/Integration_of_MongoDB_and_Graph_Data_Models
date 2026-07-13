@@ -29,7 +29,7 @@ Integration_of_MongoDB_and_Graph_Data_Models/
 │   ├── generate_data.py       # Генерация тестовых данных
 │   ├── load_data.py           # Загрузка данных в MongoDB
 │   ├── queries.py             # Запросы 1 и 2 уровня
-│   ├── performance_test.py    # Тестирование производительности
+│   ├── p_test.py              # Тестирование производительности
 │   └── visualize.py           # Визуализация и алгоритм Дейкстры
 │
 ├── output/

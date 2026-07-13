@@ -1,5 +1,5 @@
 """
-load_data.py — Загрузка данных из JSON-файлов в MongoDB.
+load_data.py - Загрузка данных из JSON-файлов в MongoDB.
 """
 
 import json
