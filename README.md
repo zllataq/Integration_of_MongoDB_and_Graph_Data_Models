@@ -47,7 +47,7 @@ Integration_of_MongoDB_and_Graph_Data_Models/
 ```bash
 git clone https://github.com/zllataq/Integration_of_MongoDB_and_Graph_Data_Models.git
 cd Integration_of_MongoDB_and_Graph_Data_Models
-
+```
 ## 2. Создать и активировать виртуальное окружение
 
 python3 -m venv venv
