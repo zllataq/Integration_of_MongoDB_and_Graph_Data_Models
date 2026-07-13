@@ -77,7 +77,7 @@ python src/queries.py
 
 ## 7. Запустить тестирование производительности
 
-python src/performance_test.py
+python src/p_test.py
 
 ## 8. Визуализировать граф
 
