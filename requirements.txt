@@ -1,2 +1,4 @@
 pymongo==4.7.0
 python-dotenv==1.0.1
+networkx>=3.0
+matplotlib>=3.5
