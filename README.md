@@ -39,7 +39,7 @@ Integration_of_MongoDB_and_Graph_Data_Models/
 ├── .gitignore                 # Игнорируемые файлы
 ├── README.md                  # Описание проекта
 └── requirements.txt           # Зависимости Python
-
+```
 # Запуск
 
 ## 1. Клонировать репозиторий
