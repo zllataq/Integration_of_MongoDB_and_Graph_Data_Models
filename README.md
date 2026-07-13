@@ -39,3 +39,46 @@ Integration_of_MongoDB_and_Graph_Data_Models/
 ├── .gitignore                 # Игнорируемые файлы
 ├── README.md                  # Описание проекта
 └── requirements.txt           # Зависимости Python
+
+# Запуск
+
+## 1. Клонировать репозиторий
+
+```bash
+git clone https://github.com/zllataq/Integration_of_MongoDB_and_Graph_Data_Models.git
+cd Integration_of_MongoDB_and_Graph_Data_Models
+
+## 2. Создать и активировать виртуальное окружение
+
+python3 -m venv venv
+source venv/bin/activate
+
+## 3. Установить зависимости
+
+pip install -r requirements.txt
+
+## 4. Настроить подключение к MongoDB
+
+Создать файл .env:
+
+echo "MONGO_URI=mongodb://localhost:27017/" > .env
+echo "DATABASE_NAME=practice_graph" >> .env
+Запустить MongoDB:
+
+brew services start mongodb-community@8.0
+
+## 5. Загрузить данные в MongoDB
+
+python src/load_data.py
+
+## 6. Выполнить запросы
+
+python src/queries.py
+
+## 7. Запустить тестирование производительности
+
+python src/performance_test.py
+
+## 8. Визуализировать граф
+
+python src/visualize.py
